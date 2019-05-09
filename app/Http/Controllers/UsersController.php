@@ -8,17 +8,32 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth',[
+            'except'=>['show','create','store']
+        ]);
+
+        $this->middleware('guest',[
+            'only'=>['create']
+        ]);
+    }
+
+    //注册页面get
     public function create()
     {
         return view('users.create');
     }
 
 
+    //用户中心
     public function show(User $user)
     {
         return view('users.show',compact('user'));
     }
 
+    //注册
     public function store(Request $request){
 
         //验证表单数据
@@ -41,12 +56,14 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update',$user);
         return view('users.edit',compact('user'));
     }
 
     //更新
     public function update(User $user,Request $request)
     {
+        $this->authorize('update',$user);
          //验证表单数据
          $this->validate($request,[
             'name'=>'required|max:50',
