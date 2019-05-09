@@ -12,12 +12,20 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth',[
-            'except'=>['show','create','store']
+            'except'=>['show','create','store','index']
         ]);
 
         $this->middleware('guest',[
             'only'=>['create']
         ]);
+    }
+
+
+    //用户列表
+    public function index()
+    {
+        $users = User::All();    
+        dd($users);
     }
 
     //注册页面get
