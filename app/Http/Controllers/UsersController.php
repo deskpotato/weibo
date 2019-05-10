@@ -24,8 +24,9 @@ class UsersController extends Controller
     //用户列表
     public function index()
     {
-        $users = User::All();    
-        dd($users);
+        // $users = User::All();    
+        $users = User::paginate(10);
+        return view('users.index',compact('users'));
     }
 
     //注册页面get
