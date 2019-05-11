@@ -36,13 +36,6 @@ class UsersController extends Controller
         return view('users.create');
     }
 
-
-    //用户中心
-    public function show(User $user)
-    {
-        return view('users.show',compact('user'));
-    }
-
     //注册
     public function store(Request $request){
 
@@ -137,5 +130,13 @@ class UsersController extends Controller
             $message->subject($subject);
         });
     }
+
+    //用户中心
+    public function show(User $user)
+    {
+        $statuses = $user->statuses()->orderBy('created_at','desc')->paginate(10);    
+        return view('users.show',compact('user','statuses'));
+    }
+
 
 }
