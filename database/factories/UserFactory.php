@@ -25,5 +25,6 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
         'created_at'=>$data_time,
         'updated_at'=>$data_time,
+        'activated'=>true
     ];
 });

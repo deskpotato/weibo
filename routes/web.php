@@ -20,6 +20,10 @@ Route::get('/about', 'StaticPagesController@about')->name('about');
 #用户注册页面
 Route::get('/signup', 'UsersController@create')->name('signup');
 
+Route::get('/signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
+
+
+
 #用户路由资源
 Route::resource('users', 'UsersController');
 
