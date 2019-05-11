@@ -130,12 +130,9 @@ class UsersController extends Controller
     {
         $view = "emails.confirm";
         $data = compact('user');
-        $from = '2279747617@qq.com';
-        $name ='weibo.test-管理员';
         $to = $user->email;
         $subject = '感谢您注册 weibo 应用!请确认您的邮箱';
-        Mail::send($view, $data, function ($message)use($from,$name,$to,$subject) {
-            $message->from($from, $name);
+        Mail::send($view, $data, function ($message)use($to,$subject) {
             $message->to($to);
             $message->subject($subject);
         });
